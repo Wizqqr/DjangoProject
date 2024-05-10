@@ -1,6 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+
 import datetime
+from .models import PostBooks
+
+def book_list(request):
+    if request.method == 'GET':
+        books = PostBooks.objects.all()
+        return render(request, 'book_list.html', {'books': books})
+
+def book_full_info(request, id):
+    if request.method == 'GET':
+        book = get_object_or_404(PostBooks, id=id)
+        return render(request, 'book_full_info.html', {'book': book})
 
 def my_bio(request):
     if request.method == 'GET':
