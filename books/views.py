@@ -13,7 +13,8 @@ def book_list(request):
 def book_full_info(request, id):
     if request.method == 'GET':
         book = get_object_or_404(PostBooks, id=id)
-        return render(request, 'book_full_info.html', {'book': book})
+        reviews = book.reviews.all()
+        return render(request, 'book_full_info.html', {'book': book, 'reviews': reviews})
 
 def my_bio(request):
     if request.method == 'GET':

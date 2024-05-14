@@ -17,3 +17,12 @@ class PostBooks(models.Model):
     class Meta:
         verbose_name = 'Books'
         verbose_name_plural = 'List of books'
+
+class Review(models.Model):
+    book = models.ForeignKey(PostBooks, related_name='reviews', on_delete=models.CASCADE)
+    stars = models.IntegerField()
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Review for {self.book.name}'

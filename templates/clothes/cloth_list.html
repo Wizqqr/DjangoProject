@@ -1,0 +1,46 @@
+<!-- Ваш файл template.html -->
+
+{% load static %}
+{% include 'header.html' %}
+
+<style>
+  /* Ваши стили CSS */
+  .clothes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cloth-item {
+    width: 30%; /* Ширина каждого элемента (товара) */
+    margin: 10px; /* Расстояние между элементами */
+    padding: 20px;
+    border: 1px solid #ccc; /* Обрамление для каждого элемента */
+  }
+
+  @media (max-width: 768px) {
+    .cloth-item {
+      width: 45%; /* Изменяем ширину элементов на мобильных устройствах */
+    }
+  }
+
+  @media (max-width: 576px) {
+    .cloth-item {
+      width: 100%; /* Изменяем ширину элементов на мобильных устройствах с очень узкими экранами */
+    }
+  }
+</style>
+
+<div class="clothes-container">
+  {% for cloth in clothes %}
+    <div class="cloth-item">
+      <h1>{{ cloth.name }}</h1>
+      <p>{{ cloth.price }}</p>
+      <button><a href="{{ cloth.id }}">Подробнее</a></button>
+    </div>
+  {% endfor %}
+  <button><a href="boys">Мужской отдел</a></button>
+  <button><a href="girls">Женский отдел</a></button>
+</div>
+
+{% include 'footer.html' %}
