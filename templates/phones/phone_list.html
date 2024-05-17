@@ -5,13 +5,17 @@
     <title>Title</title>
 </head>
 <body>
+
 <h1>Список телефонов</h1>
-<button><a href="#">Add</a></button>
+<button><a href="/create_phone/">Add</a></button>
 <ul>
     {% for i in phones %}
         <h2>{{ i.title }}</h2>
         <a href="/phone_list/{{ i.id }}/">Подробнее</a>
     {% endfor %}
 </ul>
+<button><a href="/add_comment_phone/">Add a comment</a></button>
 </body>
 </html>
+
+
