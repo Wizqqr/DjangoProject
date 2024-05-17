@@ -1,6 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-
+from django.utils import timezone
 
 class Phone(models.Model):
     title = models.CharField(max_length=100)
@@ -20,5 +20,7 @@ class Review(models.Model):
         return f'{self.review_phone}-{self.stars}'
 
 class Comment(models.Model):
-    text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    text = models.TextField(blank=True,null=True)
+
+    def __str__(self):
+        return self.text

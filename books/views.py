@@ -26,5 +26,4 @@ def my_hobbies(request):
 
 def my_time(request):
     if request.method == 'GET':
-        current_time = datetime.datetime.now()
-        return HttpResponse('My time is: ' + str(current_time))
+        return HttpResponse('My time is: ')

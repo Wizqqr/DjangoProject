@@ -5,30 +5,23 @@
     <title>Phone List</title>
 </head>
 <body>
-    <h1>Phone List</h1>
-    <button><a href="{% url 'create_phone' %}">Add</a></button>
-    <ul>
-        {% for phone in phones %}
-            <li>
-                <h2>{{ phone.title }}</h2>
-                <p>{{ phone.description }}</p>
-                <a href="/phone_list/{{ phone.id }}/">Details</a>
-                <!-- Форма для добавления комментария -->
-                <form method="post" action="{% url 'add_comment' phone.id %}">
-                    {% csrf_token %}
-                    <textarea name="text"></textarea>
-                    <button type="submit">Add Comment</button>
-                </form>
-                <hr>
-                <!-- Отображение комментариев для данного телефона -->
-                <ul>
-                    {% for comment in phone.comments.all %}
-                        <li>{{ comment.text }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
+<h1>Список телефонов</h1>
+<button><a href="/create_phone/">Add</a></button>
+<ul>
+    {% for phone in phones %}
+        <li>
+            <h2>{{ phone.title }}</h2>
+            <a href="/phone_list/{{ phone.id }}/">Подробнее</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Добавить комментарий</h2>
+<form action="/phone_list/" class="decor" method="POST">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Добавить комментарий</button>
+</form>
+
 </body>
 </html>
-
