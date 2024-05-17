@@ -8,6 +8,6 @@ class PhoneForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = models.Comment
-        fields = '__all__'
+        fields = ['text']
 
 
