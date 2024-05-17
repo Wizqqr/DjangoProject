@@ -11,13 +11,18 @@
     {% for phone in phones %}
         <li>
             <h2>{{ phone.title }}</h2>
-            <a href="/phone_list/{{ phone.id }}/">Подробнее</a>
+            <a href="{% url 'phone_detail' phone.id %}">Подробнее</a>
         </li>
     {% endfor %}
 </ul>
 
+<h1>Comments:</h1>
+{% for comment in comments %}
+<p>{{ comment.text}}</p>
+{% endfor %}
+
 <h2>Добавить комментарий</h2>
-<form action="/phone_list/" class="decor" method="POST">
+<form action="{% url 'create_comment' %}" method="POST">
     {% csrf_token %}
     {{ comment_form.as_p }}
     <button type="submit">Добавить комментарий</button>

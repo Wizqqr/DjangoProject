@@ -28,7 +28,7 @@ def create_phone_view(request):
         form = forms.PhoneForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponse('<h1>Create a new phone</h1>')
+            return redirect('/phone_list/')
     else:
         form = forms.PhoneForm()
 
@@ -61,14 +61,14 @@ def phone_list(request):
     return render(request, 'phones/phone_list.html', {'phones': phones, 'comments': comments, 'comment_form': comment_form})
 
 
-# def create_comment_view(request):
-#     if request.method == 'POST':
-#         comment_form = forms.CommentForm(request.POST, request.FILES)
-#         if comment_form.is_valid():
-#             comment_form.save()
-#             return HttpResponse('<h1>Create a new comment</h1>')
-#     else:
-#         comment_form = forms.CommentForm()
-#
-#     return render(request, template_name='phones/phone_list.html',
-#                   context={'comment_form': comment_form})
+def create_comment_view(request):
+    if request.method == 'POST':
+        comment_form = forms.CommentForm(request.POST, request.FILES)
+        if comment_form.is_valid():
+            comment_form.save()
+            return redirect('phone_list')
+    else:
+        comment_form = forms.CommentForm()
+
+    return render(request, template_name='phones/phone_list.html',
+                  context={'comment_form': comment_form})
