@@ -1,29 +1,68 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.views import generic
+from . import forms
+from . import models
 
-import datetime
-from .models import PostBooks
+# def book_full_info(request, id):
+#     if request.method == 'GET':
+#         book = get_object_or_404(PostBooks, id=id)
+#         reviews = book.reviews.all()
+#         return render(request, 'book_full_info.html', {'book': book, 'reviews': reviews})
 
-def book_list(request):
-    if request.method == 'GET':
-        books = PostBooks.objects.all()
-        return render(request, 'book_list.html', {'books': books})
+class BookList(generic.ListView):
+    model = models.PostBooks
+    template_name = 'books/book_list.html'
+    context_object_name = 'books'
 
-def book_full_info(request, id):
-    if request.method == 'GET':
-        book = get_object_or_404(PostBooks, id=id)
-        reviews = book.reviews.all()
-        return render(request, 'book_full_info.html', {'book': book, 'reviews': reviews})
+class BookFullInfo(generic.DetailView):
+    template_name = 'books/book_full_info.html'
+    context_object_name = 'book_id'
 
-def my_bio(request):
-    if request.method == 'GET':
-        return HttpResponse('My name is Aziret, surname is Dzhumabekov and my age is 15')
+    def get_object(self, **kwargs):
+        book_id = self.kwargs.get('id')
+        return get_object_or_404(models.PostBooks, id=book_id)
 
-def my_hobbies(request):
-    if request.method == 'GET':
-        return HttpResponse('My hobbies are studying maths, english, physics, chemistry and the favorite one IT. I go to the gym and swim but not every day')
+class BookChange(generic.UpdateView):
+    template_name = 'books/book_change.html'
+    form_class = forms.BookForm
+    success_url = '/books/'
 
-def my_time(request):
-    if request.method == 'GET':
-        return HttpResponse('My time is: ')
+    def get_object(self, **kwargs):
+        book_id = self.kwargs.get('id')
+        return get_object_or_404(models.PostBooks, id=book_id)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super(BookChange, self).form_valid(form=form)
+
+class BookDelete(generic.DeleteView):
+    template_name = 'books/book_delete.html'
+    success_url = '/books/'
+
+    def get_object(self, **kwargs):
+        book_id = self.kwargs.get('id')
+        return get_object_or_404(models.PostBooks, id=book_id)
+
+class BookAdd(generic.CreateView):
+    template_name = 'books/book_add.html'
+    success_url = '/books/'
+    form_class = forms.BookForm
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super(BookAdd, self).form_valid(form=form)
+
+class SearchBookView(generic.ListView):
+    template_name = 'books/book_list.html'
+    context_object_name = 'books'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return models.PostBooks.objects.filter(name__icontains=self.request.GET.get('q'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        contex = super().get_context_data(**kwargs)
+        contex['q'] = self.request.GET.get('q')
+        return contex

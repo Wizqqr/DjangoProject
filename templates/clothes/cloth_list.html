@@ -1,46 +1,56 @@
 <!-- Ваш файл template.html -->
 
-{% load static %}
 {% include 'header.html' %}
+{% load static %}
 
-<style>
-  /* Ваши стили CSS */
-  .clothes-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .cloth-item {
-    width: 30%; /* Ширина каждого элемента (товара) */
-    margin: 10px; /* Расстояние между элементами */
-    padding: 20px;
-    border: 1px solid #ccc; /* Обрамление для каждого элемента */
-  }
-
-  @media (max-width: 768px) {
-    .cloth-item {
-      width: 45%; /* Изменяем ширину элементов на мобильных устройствах */
-    }
-  }
-
-  @media (max-width: 576px) {
-    .cloth-item {
-      width: 100%; /* Изменяем ширину элементов на мобильных устройствах с очень узкими экранами */
-    }
-  }
-</style>
-
+<link rel="stylesheet" href="{% static 'css/clothes.css' %}">
+<div class="clothes">
+  <a href="/cloth_create/" class="create_button">
+    Add a cloth
+  </a>
 <div class="clothes-container">
   {% for cloth in clothes %}
     <div class="cloth-item">
       <h1>{{ cloth.name }}</h1>
       <p>{{ cloth.price }}</p>
-      <button><a href="{{ cloth.id }}">Подробнее</a></button>
+      <button><a href="{% url 'detail_view' cloth.id%}">Подробнее</a></button>
     </div>
   {% endfor %}
-  <button><a href="boys">Мужской отдел</a></button>
-  <button><a href="girls">Женский отдел</a></button>
 </div>
+<center class="center_buttons">
+  <a href="boys" class="animated-button">
+  <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+    ></path>
+  </svg>
+  <span class="text">Мужской отдел</span>
+  <span class="circle"></span>
+  <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+    ></path>
+  </svg>
+</a>
 
+
+  <a href="girls" class="animated-button">
+  <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+    ></path>
+  </svg>
+  <span class="text">Женский отдел</span>
+  <span class="circle"></span>
+  <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+    ></path>
+  </svg>
+</a>
+
+
+</center>
+
+  </div>
 {% include 'footer.html' %}

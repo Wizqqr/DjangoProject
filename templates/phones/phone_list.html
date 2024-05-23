@@ -5,6 +5,12 @@
     <title>Phone List</title>
 </head>
 <body>
+
+ <div class="container">
+        <form action="{% url 'search' %}" method="GET" class="search-form">
+            <input type="text" type="search" name="q" class="form-control" placeholder="Search">
+            <button type="submit" class="btn btn-primary">Поиск</button>
+        </form>
 <h1>Список телефонов</h1>
 <button><a href="/create_phone/">Add</a></button>
 <ul>

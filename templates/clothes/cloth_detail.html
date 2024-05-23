@@ -9,13 +9,11 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Add a phone</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-  <button type="submit">Change</button>
-  <button type="reset">Reset</button>
-</form>
+<button><a href="/shop/{{ cloth_id.id}}/delete/">Delete</a></button>
+<button><a href="/shop/{{ cloth_id.id}}/update/">Change</a></button>
+<br>
+<h1>{{ cloth_id.name }}</h1>
+<p>{{ cloth_id.price}}</p>
 </body>
 </html>
 
