@@ -2,7 +2,7 @@
 {% include 'header.html' %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <div class="container">
-        <form action="{% url 'search' %}" method="GET" class="search-form">
+        <form action="{% url 'book_search' %}" method="GET" class="search-form">
             <input type="text" type="search" name="q" class="form-control" placeholder="Search">
             <button type="submit" class="btn btn-primary">Поиск</button>
         </form>
@@ -15,7 +15,8 @@
 <center>
     <h1>{{ book.name }}</h1>
 <p>{{ book.author }}</p>
- <button><a href="{{ book.id }}">Подробнее</a></button>
+ <button><a href="{% url 'fullaboutbooks' id=book.id %}">Подробнее</a></button
+=
 </center>
 {% endfor %}
 
