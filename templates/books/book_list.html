@@ -16,8 +16,7 @@
     <h1>{{ book.name }}</h1>
 <p>{{ book.author }}</p>
  <button><a href="{% url 'fullaboutbooks' id=book.id %}">Подробнее</a></button
-=
 </center>
 {% endfor %}
 
-{% include 'footer.html' %}
+    {% include 'footer.html' %}

@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     'product',
     'telephone',
     'cloth',
+    'users',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -31,6 +33,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'users.middlewares.AgeClubMiddleware',
+    'registration.middlewares.YearsExperienceSalaryMiddleware',
 ]
 
 ROOT_URLCONF = 'main.urls'
