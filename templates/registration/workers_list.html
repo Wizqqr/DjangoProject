@@ -12,8 +12,9 @@
             <li>
             <h1>Привет - {{ i.username }}</h1>
             <p>Почта - {{ i.email }}</p>
-            <p>Имя - {{ i.first_name }}</p>
+            <p>Имя - {{ i.username }}</p>
             <p>Возраст - {{ i.age }}</p>
+                <p>Уровень - {{ i.level }}</p>
             {% if i.salary %}
             <p>Ваша зарплата - {{ i.salary }}</p>
             {% else %}

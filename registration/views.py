@@ -14,30 +14,28 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         years_of_experience = form.cleaned_data['years_of_experience']
-        if years_of_experience > 1:
-            self.object.salary = 0
-        elif years_of_experience >= 2 and years_of_experience <= 3:
+        if years_of_experience >= 2 and years_of_experience <= 3:
             self.object.salary = 1000
         elif years_of_experience >= 4 and years_of_experience <= 5:
             self.object.salary = 2000
         elif years_of_experience > 5:
             self.object.salary = 3000
         else:
-            self.object.salary = 'Зарплата не определена'
+            self.object.salary = 0
         self.object.save()
         return response
 
 
 class WorkRegisterView(LoginView):
-    form_class = forms.NewWorkerUserCreationForm
+    form_class = forms.CustomAuthenticationForm
     template_name = 'registration/login.html'
 
     def get_success_url(self):
-        return reverse('workers:workers_list')
+        return reverse('registration:workerslist')
 
 
 class AuthLogoutView(LogoutView):
-    next_page = reverse_lazy('workers:login')
+    next_page = reverse_lazy('registration:workerslogin')
 
 
 class WorkersListView(ListView):
@@ -49,6 +47,6 @@ class WorkersListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['salary'] = getattr(self.request, 'salary', 'Зарплата не определна')
+        # context['salary'] = getattr(self.request, 'salary', 'Зарплата не определна')
         return context
 

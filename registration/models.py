@@ -24,15 +24,13 @@ def set_way(sender, instance, created, **kwargs):
     if created:
         print("Сигнал обработан пользователь создан")
         years_of_experience = instance.years_of_experience
-        if years_of_experience < 1:
-            instance.level = 'Junior'
-        elif years_of_experience >= 1 and years_of_experience <= 2:
+        if years_of_experience >= 1 and years_of_experience <= 2:
             instance.level = 'Junior'
         elif years_of_experience >= 3 and years_of_experience <= 4:
             instance.level = 'Middle'
         elif years_of_experience >= 4 and years_of_experience <= 5:
             instance.level = 'Middle+'
-        elif years_of_experience >= 6 and years_of_experience <= 10:
+        elif years_of_experience >= 6:
             instance.level = 'Senior'
         else:
             instance.level = 'Уровень не определен'
