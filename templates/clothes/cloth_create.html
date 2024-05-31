@@ -1,23 +1,22 @@
+    {% include 'header.html' %}
+    {% load static %}
 
-
-{% include 'header.html' %}
-{% load static %}
-
-<link rel="stylesheet" href="{% static 'css/clothes.css' %}">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form action="/cloth_create/" class="decor" method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-  <button type="submit">Add</button>
-  <button type="reset">Clear</button>
-</form>
-</body>
-</html>
-{% include 'footer.html' %}
-Сделал CBV books, cloth и Search DZ5
+    <link rel="stylesheet" href="{% static 'css/clothes_create.css' %}">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+<div class="content-wrapper">
+    <form action="/cloth_create/" class="decor" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+        <button type="reset">Clear</button>
+    </form>
+</div>
+    </body>
+    </html>
+    {% include 'footer.html' %}

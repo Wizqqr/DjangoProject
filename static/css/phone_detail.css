@@ -1,0 +1,75 @@
+
+/* Button Styles */
+.action-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.action-button a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.update-button {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.update-button:hover {
+    background-color: #e0a800;
+}
+
+/* Title and Price Styles */
+.phone-title {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.phone-price {
+    font-size: 1.5em;
+    color: #555;
+}
+
+/* Reviews Styles */
+.reviews-title {
+    font-size: 1.5em;
+    color: #555;
+    margin-top: 40px;
+}
+
+.reviews-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.reviews-table th, .reviews-table td {
+    padding: 10px;
+    text-align: left;
+    border: 2px solid #ccc;
+}
+
+.reviews-table th {
+    background-color: #f1f1f1;
+    color: #333;
+}

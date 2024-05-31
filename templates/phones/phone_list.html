@@ -1,3 +1,6 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/phone_list.css' %}">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,33 +9,39 @@
 </head>
 <body>
 
- <div class="container">
-        <form action="{% url 'phone_search' %}" method="GET" class="search-form">
-            <input type="text" type="search" name="q" class="form-control" placeholder="Search">
-            <button type="submit" class="btn btn-primary">Поиск</button>
-        </form>
-<h1>Список телефонов</h1>
-<button><a href="/create_phone/">Add</a></button>
-<ul>
-    {% for phone in phones %}
-        <li>
-            <h2>{{ phone.title }}</h2>
-            <a href="{% url 'phone_detail' phone.id %}">Подробнее</a>
-        </li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <form action="{% url 'phone_search' %}" method="GET" class="search-form">
+        <input type="search" name="q" class="form-control" placeholder="Search">
+        <button type="submit" class="btn btn-primary">Поиск</button>
+    </form>
 
-<h1>Comments:</h1>
-{% for comment in comments %}
-<p>{{ comment.text}}</p>
-{% endfor %}
+    <h1 class="phone-list-title">Список телефонов</h1>
+    <button class="add-button"><a href="/create_phone/">Add</a></button>
 
-<h2>Добавить комментарий</h2>
-<form action="{% url 'create_comment' %}" method="POST">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <button type="submit">Добавить комментарий</button>
-</form>
+    <ul class="phone-list">
+        {% for phone in phones %}
+            <li class="phone-item">
+                <h2 class="phone-title">{{ phone.title }}</h2>
+                <a class="phone-detail-link" href="{% url 'phone_detail' phone.id %}">Подробнее</a>
+            </li>
+        {% endfor %}
+    </ul>
 
+    <h1 class="comments-title">Comments:</h1>
+    <div class="comments-section">
+        {% for comment in comments %}
+            <p class="comment-text">{{ comment.text}}</p>
+        {% endfor %}
+    </div>
+
+    <h2 class="add-comment-title">Добавить комментарий</h2>
+    <form action="{% url 'create_comment' %}" method="POST" class="comment-form">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-secondary">Добавить комментарий</button>
+    </form>
+</div>
+
+{% include 'footer.html' %}
 </body>
 </html>

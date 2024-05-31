@@ -1,3 +1,6 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/phone_detail.css' %}">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,23 +8,31 @@
     <title>Title</title>
 </head>
 <body>
-<button><a href="/phone_list/{{ phone_id.id }}/delete/">Delete</a></button>
-<button><a href="/phone_list/{{ phone_id.id }}/update/">Change</a></button>
-<br>
-<h1>{{ phone_id.title }}</h1>
-<p>{{ phone_id.price }}</p>
-<h2>Отзывы</h2>
 
-<table border="2">
-    <tr>
-        <td>Оценка</td> <td>Отзыв</td> <td>Дата отзыва</td>
-    </tr>
-    {% for i in phone_id.review_phone.all %}
-    <tr>
-        <td>{{ i.stars }}</td> <td>{{ i.description }}</td> <td>{{ i.created_at }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="container">
+    <button class="action-button delete-button"><a href="/phone_list/{{ phone_id.id }}/delete/">Delete</a></button>
+    <button class="action-button update-button"><a href="/phone_list/{{ phone_id.id }}/update/">Change</a></button>
 
+    <h1 class="phone-title">{{ phone_id.title }}</h1>
+    <p class="phone-price">{{ phone_id.price }}</p>
+
+    <h2 class="reviews-title">Отзывы</h2>
+    <table class="reviews-table" border="2">
+        <tr>
+            <th>Оценка</th>
+            <th>Отзыв</th>
+            <th>Дата отзыва</th>
+        </tr>
+        {% for i in phone_id.review_phone.all %}
+        <tr>
+            <td>{{ i.stars }}</td>
+            <td>{{ i.description }}</td>
+            <td>{{ i.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% include 'footer.html' %}
 </body>
 </html>
