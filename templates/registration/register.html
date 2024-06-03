@@ -8,13 +8,15 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container">
-<h1 class="textil">Регистрация</h1>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Регистрация</button>
-</form>
+<div class="registration-container">
+    <div class="registration-card">
+        <h1 class="registration-title">Регистрация</h1>
+        <form method="POST" enctype="multipart/form-data" class="registration-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="registration-button">Регистрация</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

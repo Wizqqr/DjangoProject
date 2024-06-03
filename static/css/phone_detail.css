@@ -1,15 +1,26 @@
 
-/* Button Styles */
+
+.container_phone {
+    display: flex;
+    column-gap: 100px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
 .action-button {
     display: inline-block;
     padding: 10px 20px;
-    margin: 10px 0;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Плавное изменение при наведении */
 }
 
 .action-button a {
@@ -19,6 +30,11 @@
 
 .action-button:hover {
     background-color: #0056b3;
+    transform: scale(1.05); /* Небольшое увеличение при наведении */
+}
+
+.action-button:active {
+    transform: scale(0.95); /* Небольшое уменьшение при нажатии */
 }
 
 .delete-button {
@@ -38,35 +54,37 @@
     background-color: #e0a800;
 }
 
-/* Title and Price Styles */
 .phone-title {
-    font-size: 2em;
+    font-size: 2.5em;
     color: #333;
-    margin-bottom: 20px;
+    text-align: center;
 }
 
 .phone-price {
     font-size: 1.5em;
     color: #555;
+    text-align: center;
 }
 
-/* Reviews Styles */
+.phone-image {
+    display: block;
+    margin: 0 auto;
+    height: 500px;
+    width: 550px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
 .reviews-title {
-    font-size: 1.5em;
+    font-size: 2em;
     color: #555;
+    text-align: center;
     margin-top: 40px;
-}
-
-.reviews-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
 }
 
 .reviews-table th, .reviews-table td {
     padding: 10px;
-    text-align: left;
-    border: 2px solid #ccc;
+    border-bottom: 1px solid #ddd;
 }
 
 .reviews-table th {

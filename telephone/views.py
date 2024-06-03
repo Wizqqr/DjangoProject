@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from . import models, forms
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.views import generic
 
 class PhoneEditForm(generic.UpdateView):
@@ -92,3 +94,13 @@ class SearchPhoneView(generic.ListView):
         contex['q'] = self.request.GET.get('q')
         return contex
 
+@csrf_exempt
+def create_comment_ajax(request):
+    if request.method == 'POST':
+        form = forms.CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save()
+            return JsonResponse({'text': comment.text}, status=200)
+        else:
+            return JsonResponse({'errors': form.errors}, status=400)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)

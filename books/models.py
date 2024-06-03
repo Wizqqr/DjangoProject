@@ -26,3 +26,4 @@ class Review(models.Model):
 
     def __str__(self):
         return f'Review for {self.book.name}'
+

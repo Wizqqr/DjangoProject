@@ -3,7 +3,10 @@ from django.db import models
 from django.utils import timezone
 
 class Phone(models.Model):
+    image = models.ImageField(upload_to='images/', verbose_name='Upload a picture please', null=True)
     title = models.CharField(max_length=100)
+    description = models.CharField(max_length=100, verbose_name='Write some information', null=True)
+    in_stock = models.BooleanField(default=True, verbose_name='In Stock', null=True)
     price = models.PositiveIntegerField(default=1000)
 
     def __str__(self):

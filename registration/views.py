@@ -31,7 +31,7 @@ class WorkRegisterView(LoginView):
     template_name = 'registration/login.html'
 
     def get_success_url(self):
-        return reverse('registration:workerslist')
+        return reverse('telephone:phone_list')
 
 
 class AuthLogoutView(LogoutView):

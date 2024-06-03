@@ -8,38 +8,56 @@
     <title>Phone List</title>
 </head>
 <body>
+<style>
+    .phone-list{
+        display: flex;
+        column-gap: 20px;
+    }
+    .phone-image{
+        height: 150px;
+        width: 150px;
+    }
+    .phone-item{
+        width: 225px;
+    }
+</style>
 
-<div class="container">
+<div class="container" style="margin-top: 25px">
+
+    <h1 class="phone-list-title">Список телефонов</h1>
     <form action="{% url 'phone_search' %}" method="GET" class="search-form">
         <input type="search" name="q" class="form-control" placeholder="Search">
         <button type="submit" class="btn btn-primary">Поиск</button>
     </form>
 
-    <h1 class="phone-list-title">Список телефонов</h1>
-    <button class="add-button"><a href="/create_phone/">Add</a></button>
-
-    <ul class="phone-list">
+    <div class="phone-list" id="phone-list">
         {% for phone in phones %}
             <li class="phone-item">
+                <img class="phone-image" src="{{ phone.image.url }}" alt="phone">
                 <h2 class="phone-title">{{ phone.title }}</h2>
+                <p class="phone-description">{{ phone.description }}</p>
+                <p class="phone-price">{{ phone.price }}$</p>
+                <p class="phone-stock">{% if phone.in_stock %} В наличии {% else %} Нет в наличии {% endif %}</p>
                 <a class="phone-detail-link" href="{% url 'phone_detail' phone.id %}">Подробнее</a>
             </li>
         {% endfor %}
-    </ul>
-
-    <h1 class="comments-title">Comments:</h1>
-    <div class="comments-section">
-        {% for comment in comments %}
-            <p class="comment-text">{{ comment.text}}</p>
-        {% endfor %}
     </div>
+    <div class="comments-section">
+    <h1 class="comments-title">Comments:</h1>
+    {% for comment in comments %}
+        <p class="comment-text">{{ comment.text}}</p>
+    {% endfor %}
+</div>
 
-    <h2 class="add-comment-title">Добавить комментарий</h2>
-    <form action="{% url 'create_comment' %}" method="POST" class="comment-form">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit" class="btn btn-secondary">Добавить комментарий</button>
-    </form>
+<h2 class="add-comment-title">Add a Comment</h2>
+<form id="comment-form" method="POST" class="comment-form" data-url="{% url 'create_comment_ajax' %}">
+    {% csrf_token %}
+    <textarea name="text" placeholder="Write your comment here..." required></textarea>
+    <button type="submit">Add Comment</button>
+</form>
+    <script src="{% static 'js/phone_js.js'%}"></script>
+    <script src="{% static 'js/phone_filter.js'%}"></script>
+
 </div>
 
 {% include 'footer.html' %}
