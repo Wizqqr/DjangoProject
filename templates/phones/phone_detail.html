@@ -1,39 +1,81 @@
 {% load static %}
-{% include 'header.html' %}
-<link rel="stylesheet" href="{% static 'css/phone_detail.css' %}">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ phone_id.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/phone_detail.css' %}">
 </head>
 <body>
 
+{% include 'header.html' %}
+
 <div class="container_phone">
     <div class="phone_detail_div">
-    <img class="phone-image" src="{{ phone_id.image.url }}" alt="phone">
-    <h1 class="phone-title">{{ phone_id.title }}</h1>
-    <p class="phone-price">{{ phone_id.price }}$</p>
-    <button class="action-button delete-button"><a href="/phone_list/{{ phone_id.id }}/delete/">Delete</a></button>
-    <button class="action-button update-button"><a href="/phone_list/{{ phone_id.id }}/update/">Change</a></button>
+        <div class="phone-images">
+            <img class="phone-image" src="{{ phone_id.image.url }}" alt="{{ phone_id.title }}">
+        </div>
+
+        <div class="phone-info">
+            <h1 class="phone-title">{{ phone_id.title }}</h1>
+            <p class="phone-price">{{ phone_id.price_for_first }}$</p>
+            <p class="apple-card">Get 3% Daily Cash with Apple Card</p>
+            <p class="personalize">Personalize them. It’s fast and free.</p>
+            <p class="engrave-description">Engrave a mix of emoji, names, initials, and numbers to make it unmistakably yours. Only at Apple.</p>
+
+            <button class="action-button add-to-bag-button">Add to Bag</button>
+
+            <div class="purchase-info">
+                <p>To purchase with monthly pricing, add this item to your bag and choose to check out with Apple Card Monthly Installments.<sup>◊</sup></p>
+            </div>
+
+            <div class="availability">
+                <p>Delivery: In Stock</p>
+                <p>Free Shipping</p>
+                <p><a href="#">Get delivery dates</a></p>
+                <p>Pickup: <a href="#">Check availability</a></p>
+            </div>
+        </div>
     </div>
+
+    <div class="simular_models">
+        <h2 class="simular-models-title">So many more ways to say it.</h2>
+        <p class="simular-models-description">Engrave your AirPods with a mix of emoji, names, initials, and numbers — free. Only at Apple</p>
+        <div class="simular-models-container">
+            <div class="simular-model">
+                <img class="simular-model-image" src="{{ phone_id.second_model.url }}" alt="Second Model">
+                <h3 class="simular-model-title">{{ phone_id.second_model.title }}</h3>
+                <p class="simular-model-price">{{ phone_id.price_for_second }}$</p>
+            </div>
+            <div class="simular-model">
+                <img class="simular-model-image" src="{{ phone_id.second_model.url }}" alt="Third Model">
+                <h3 class="simular-model-title">{{ phone_id.third_model.title }}</h3>
+                <p class="simular-model-price">{{ phone_id.price_for_third}}$</p>
+            </div>
+        </div>
+    </div>
+
     <div class="phone_detail_reviews">
-    <h2 class="reviews-title">Отзывы</h2>
-    <table class="reviews-table">
-        <tr>
-            <th>Оценка</th>
-            <th>Отзыв</th>
-            <th>Дата отзыва</th>
-        </tr>
-        {% for review in phone_id.review_phone.all %}
-        <tr class="tr_for_phone">
-            <td>{{ review.stars }}</td>
-            <td>{{ review.description }}</td>
-            <td>{{ review.created_at }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+        <h2 class="reviews-title">Отзывы</h2>
+        <table class="reviews-table">
+            <thead>
+                <tr>
+                    <th>Оценка</th>
+                    <th>Отзыв</th>
+                    <th>Дата отзыва</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in phone_id.review_phone.all %}
+                <tr class="tr_for_phone">
+                    <td>{{ review.stars }}</td>
+                    <td>{{ review.description }}</td>
+                    <td>{{ review.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 

@@ -1,0 +1,25 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/mainshop_list.css'%}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="MainShop" role="main">
+    <h1 class="StartText">Store. The best way to buy the <br>products you love.</h1>
+    <div class="Phones">
+        {% for i in mainshops %}
+        <div>
+        <img class="mainshop_image" src="{{ i.gadget_image.url}}">
+        <h2 class="mainshop_title">{{ i.gadget_title }}</h2>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>
+
+{% include 'footer.html' %}

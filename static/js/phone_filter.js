@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterForm = document.getElementById('filter-form');
     const phoneList = document.getElementById('phone-list');
 
+
     filterForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(filterForm);
         const params = new URLSearchParams(formData).toString();
-
         fetch(`/filter_phones/?${params}`, {
             method: 'GET'
         })

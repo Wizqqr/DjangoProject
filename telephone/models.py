@@ -4,10 +4,15 @@ from django.utils import timezone
 
 class Phone(models.Model):
     image = models.ImageField(upload_to='images/', verbose_name='Upload a picture please', null=True)
+    second_model = models.ImageField(upload_to='images/', verbose_name='Upload a second model', null=True)
+    third_model = models.ImageField(upload_to='images/', verbose_name='Upload a third model', null=True)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=100, verbose_name='Write some information', null=True)
     in_stock = models.BooleanField(default=True, verbose_name='In Stock', null=True)
-    price = models.PositiveIntegerField(default=1000)
+    price_for_first = models.PositiveIntegerField(default=1000, null=True)
+    price_for_second = models.PositiveIntegerField(default=1000, null=True)
+    price_for_third = models.PositiveIntegerField(default=1000, null=True)
+    sale = models.PositiveIntegerField(default=0, blank=True, verbose_name='Is has a sale?', null=True)
 
     def __str__(self):
         return self.title
@@ -21,6 +26,10 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.review_phone}-{self.stars}'
+
+# class TheMostPopularPhone(models.Model):
+
+
 
 class Comment(models.Model):
     text = models.TextField(blank=True,null=True)

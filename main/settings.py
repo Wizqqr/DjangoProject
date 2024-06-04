@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'telephone',
     'cloth',
     'registration',
+    'mainshop',
 ]
 
 MIDDLEWARE = [

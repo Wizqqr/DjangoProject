@@ -5,7 +5,8 @@ from django.urls import reverse
 from django.views.generic import CreateView, ListView
 from django.urls import reverse_lazy
 from . import models, middlewares, forms
-
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 class RegisterView(CreateView):
     form_class = forms.NewWorkerUserCreationForm
     template_name = 'registration/register.html'
@@ -30,8 +31,8 @@ class WorkRegisterView(LoginView):
     form_class = forms.CustomAuthenticationForm
     template_name = 'registration/login.html'
 
-    def get_success_url(self):
-        return reverse('telephone:phone_list')
+    # def get_success_url(self):
+    #     return reverse("")
 
 
 class AuthLogoutView(LogoutView):
@@ -50,3 +51,5 @@ class WorkersListView(ListView):
         # context['salary'] = getattr(self.request, 'salary', 'Зарплата не определна')
         return context
 
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'registration/profile.html'
